@@ -1,0 +1,13 @@
+title: Oshi Deck
+description: Chrome拡張機能「Oshi Deck」のプライバシーポリシー
+theme: minima
+baseurl: "/oshi-deck-site"
+url: "https://chkrym.github.io"
+lang: ja
+
+# ポリシー文書のみを配信するサイトのため、minimaの既定のブログ機能は使わない
+minima:
+  skin: classic
+
+exclude:
+  - README.md
