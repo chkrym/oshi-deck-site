@@ -1,0 +1,11 @@
+{%- comment -%}
+minimaの既定ヘッダーはサイト内の全ページを自動でナビに並べるため、日本語版と英語版が
+「プライバシーポリシー」「Privacy Policy」の2つのボタンとして常に出る。今開いている
+ページ自身へのリンクも混ざり、どちらが何語かもラベルから判別しづらい。言語の切り替えは
+各ページ冒頭のリンクで行うので、ここではナビを出さずサイト名だけにする。
+{%- endcomment -%}
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+  </div>
+</header>
