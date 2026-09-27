@@ -8,7 +8,7 @@ lang: en
 authoritative text; if there is any discrepancy between the two, the Japanese version prevails.*
 
 - Effective date: September 12, 2026
-- Last updated: September 12, 2026
+- Last updated: September 28, 2026
 
 ## 1. Introduction
 
@@ -24,8 +24,8 @@ third party.** The Extension contains no analytics, no usage tracking, and no cr
 reporting of any kind.
 
 This policy applies only to the Extension as distributed on the Chrome Web Store. External
-services you reach from the Extension, such as YouTube and Twitch, are governed by their
-own privacy policies (see §4).
+services you reach from the Extension, such as YouTube, Twitch, and the Google Form used to
+send feedback, are governed by their own privacy policies (see §4).
 
 - Developer: chkrym
 - Contact: chkrym.dev@gmail.com
@@ -78,14 +78,22 @@ information.
 | `www.youtube.com` | Retrieving your subscriptions and their live status (see §5) | Uses your browser's YouTube sign-in state (some requests are unauthenticated) |
 | `i.ytimg.com`, `yt3.ggpht.com` | Displaying YouTube video thumbnails and channel icons | None |
 | `static-cdn.jtvnw.net` | Displaying Twitch stream thumbnails and channel icons | None |
+| `docs.google.com` (feedback form) | Where "Send feedback" in Settings > General takes you | None (only opens when you choose to click it) |
 
 Images are not downloaded and stored by the Extension; they are loaded directly from each
 service's content delivery network when they are displayed. As a result, opening the
 Extension's window sends your IP address and browser information to those hosts.
 
+Choosing "Send feedback" opens a Google Form we created, in a new tab. This only happens
+when you choose to click it; nothing is sent automatically. The form is pre-filled with the
+Extension's version and your connection status (whether YouTube is enabled and whether
+Twitch is connected), which are values already stored by the Extension — no access tokens,
+channel lists, or other data are included. Whatever you enter and submit is stored on
+Google's own service and governed by Google's privacy policy.
+
 How these services handle that information is governed by their own privacy policies:
 
-- Google (YouTube): https://policies.google.com/privacy
+- Google (YouTube, and the feedback form): https://policies.google.com/privacy
 - Twitch: https://www.twitch.tv/p/legal/privacy-notice/
 
 ## 5. How We Obtain Information from YouTube
@@ -210,3 +218,4 @@ For questions about this policy or about how the Extension handles data, please 
 | Date | Change |
 | --- | --- |
 | September 12, 2026 | Initial version |
+| September 28, 2026 | Added disclosure of the feedback link (Google Forms) as an external destination |
