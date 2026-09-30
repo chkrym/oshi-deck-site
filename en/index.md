@@ -8,7 +8,7 @@ lang: en
 authoritative text; if there is any discrepancy between the two, the Japanese version prevails.*
 
 - Effective date: September 12, 2026
-- Last updated: September 28, 2026
+- Last updated: September 30, 2026
 
 ## 1. Introduction
 
@@ -18,10 +18,16 @@ handles, why it handles it, and where that data is stored.
 
 The most important thing to know about the Extension is this:
 
-**We operate no servers. All data the Extension handles is stored locally on your device
+**We operate no servers. The data the Extension handles is stored locally on your device
 (in Chrome's `chrome.storage.local`) and is never transmitted to the Developer or to any
 third party.** The Extension contains no analytics, no usage tracking, and no crash
 reporting of any kind.
+
+The one exception is the settings you create (your lists, hidden items, notification
+settings, and display settings): these may be synced through Chrome's sync feature
+(`chrome.storage.sync`) to **your own Google Account**, and carried over to other devices
+where you use Chrome with the same account (see §3). This is done by a mechanism built into
+Chrome, and even then the Developer never receives your data.
 
 This policy applies only to the Extension as distributed on the Chrome Web Store. External
 services you reach from the Extension, such as YouTube, Twitch, and the Google Form used to
@@ -39,14 +45,30 @@ categories defined by the Chrome Web Store.
 | --- | --- | --- | --- | --- |
 | Twitch access token | Authentication information | Twitch authorization screen (with your approval) | To query Twitch's API on your behalf for the channels you follow and their live status | On your device only |
 | Twitch user ID and login name | Personally identifiable information | Twitch API | To identify whose data to request, and to show the connected account in the settings screen | On your device only |
-| Channels you follow on Twitch and their live streams (channel name, icon, stream title, viewer count, category) | Website content | Twitch API | To display the stream list, sort channels into your lists, and calculate the toolbar badge count | On your device only |
+| Channels you follow on Twitch and their live streams (channel name, icon, stream title, viewer count, category) | Website content | Twitch API | To display the stream list, sort channels into your lists, calculate the live count shown on the Extension's toolbar icon, and show desktop notifications (see below) | On your device only |
 | Channels you are subscribed to on YouTube, and live or upcoming streams (channel name, icon, video title, thumbnail, scheduled start time) | Website content | Pages on youtube.com (see §5) | Same as above | On your device only |
-| Lists you create, hidden-channel settings, and display settings (theme, sort order, view mode) | — (settings you create within the Extension) | Your own actions | To restore your settings the next time you open the Extension | On your device only |
-| Internal operating state (IDs of videos already seen, timestamps of the last fetch, back-off state when access is rate-limited) | — (internal data required to operate) | The Extension itself | To avoid fetching the same information repeatedly and to keep requests to each service to a minimum | On your device only |
+| Lists you create, hidden-item settings, notification settings (which channels and lists to notify you about), and display settings (theme, sort order, view mode) | — (settings you create within the Extension) | Your own actions | To restore your settings the next time you open the Extension, and, when Chrome sync is on, to carry your settings over to your other devices | On your device; also synced to your Google Account when extensions are included in Chrome sync (see §3) |
+| Internal operating state (IDs of videos already seen, timestamps of the last fetch, back-off state when access is rate-limited, the notification baseline (URLs of the live streams seen at the last check), and the settings sync status (such as why the last upload failed)) | — (internal data required to operate) | The Extension itself | To avoid fetching the same information repeatedly and to keep requests to each service to a minimum; to avoid notifying you twice about the same stream; to tell you in the settings screen when syncing is not working | On your device only |
 
 The Extension handles no data beyond what is listed above. In particular, it does not read
 your browsing history, your location, anything you type, or the contents of other tabs or
 websites.
+
+### Desktop notifications
+
+The Extension can show a desktop notification when a channel you follow or subscribe to
+starts streaming.
+
+- Notifications are shown only for the channels and lists you turn on in the settings
+  screen. **All notifications are off by default**
+- Notifications are displayed through Chrome's and your operating system's notification
+  features. Their contents (channel name, stream title, platform name, list name, and the
+  channel icon and stream thumbnail images) may remain in your operating system's
+  notification center as history; how that history is handled depends on your operating
+  system's settings
+- The images in a notification are fetched by the Extension from each service's content
+  delivery network at the time the notification is shown (see §4). They are only embedded
+  in the notification and are not stored
 
 ## 3. Where Data Is Stored and for How Long
 
@@ -57,8 +79,27 @@ area on your own device, and the Developer has no access to it.
   overwritten with fresh content after a period of time
 - Your Twitch access token, the lists you create, and your settings are kept until you
   delete them (see §7) or uninstall the Extension
-- The Extension does not use Chrome's sync feature, so your data is never copied to other
-  devices or to your Google Account
+
+### Syncing settings with Chrome sync
+
+The settings you create are also saved to the storage area used by Chrome's sync feature
+(`chrome.storage.sync`). What is and is not synced:
+
+- **Synced**: your lists, hidden items (hidden channels and streams), notification
+  settings, and display settings
+- **Not synced**: your Twitch access token, your Twitch user ID and login name, the channel
+  lists and stream information retrieved from each service, internal operating state, and
+  the list currently shown on each device. As before, these are stored only on your device
+  (in `chrome.storage.local`)
+
+Whether syncing happens is governed by your Chrome settings. Only if you are signed in to
+Chrome and "Extensions" is included in what Chrome syncs are the settings above saved to
+your own Google Account and copied to other devices where you use Chrome with the same
+account. If sync is off, your settings stay on your device.
+
+- To stop syncing, turn off "Extensions" in Chrome's sync settings
+- Data synced to your Google Account is handled according to your Chrome sync settings and
+  Google's privacy policy (https://policies.google.com/privacy)
 
 ## 4. Data Transmission and Third Parties
 
@@ -84,6 +125,17 @@ Images are not downloaded and stored by the Extension; they are loaded directly 
 service's content delivery network when they are displayed. As a result, opening the
 Extension's window sends your IP address and browser information to those hosts.
 
+In addition, if you have turned on desktop notifications (see §2), each time a notification
+is shown the Extension fetches the channel icon and stream thumbnail in the background from
+the same content delivery networks and embeds them in the notification (the images are not
+stored). **These requests happen even when the Extension's window is not open**, and they
+likewise send your IP address and similar information to those hosts. The destinations are
+the ones listed in the table above; notifications add no new hosts.
+
+Settings sync (see §3) goes through the sync feature built into Chrome, and synced data is
+stored in your own Google Account. It adds no destination that the Extension connects to
+directly, and the Developer never receives this data.
+
 Choosing "Send feedback" opens a Google Form we created, in a new tab. This only happens
 when you choose to click it; nothing is sent automatically. The form is pre-filled with the
 Extension's version and your connection status (whether YouTube is enabled and whether
@@ -93,7 +145,7 @@ Google's own service and governed by Google's privacy policy.
 
 How these services handle that information is governed by their own privacy policies:
 
-- Google (YouTube, and the feedback form): https://policies.google.com/privacy
+- Google (YouTube, the feedback form, and Chrome sync): https://policies.google.com/privacy
 - Twitch: https://www.twitch.tv/p/legal/privacy-notice/
 
 ## 5. How We Obtain Information from YouTube
@@ -168,10 +220,15 @@ You can delete the data stored by the Extension in any of the following ways:
    screen deletes that platform's access token and cached channel list. For Twitch, the token
    is also revoked on Twitch's side
 2. **Delete all stored data** — The settings screen lets you delete everything the Extension
-   has stored, including your lists, hidden-channel settings, display settings, caches, and
-   tokens. Afterwards the Extension returns to the state it was in when first installed
+   has stored, including your lists, hidden-item settings, notification settings, display
+   settings, caches, and tokens. Afterwards the Extension returns to the state it was in when
+   first installed. This also empties the Chrome sync storage area (see §3), so **the
+   settings on your other synced devices are deleted as well**
 3. **Uninstall** — Removing the Extension from Chrome causes Chrome to discard everything
-   stored in `chrome.storage.local`
+   stored in `chrome.storage.local`. Settings synced to your Google Account (see §3) are
+   handled by Chrome's sync mechanism. If you want to be sure the synced settings are
+   removed, use option 2 above before uninstalling. You can also delete Chrome's sync data
+   itself by resetting sync in your Google Account
 
 You can also revoke the connection from Twitch's own settings, under
 "Connections" (https://www.twitch.tv/settings/connections).
@@ -187,8 +244,9 @@ of the following:
 - Use data for advertising or any form of targeting
 - Allow any human, including the Developer, to read the data
 
-As described above, the Extension has no server operated by the Developer, and data never
-leaves your device. These practices are therefore not merely prohibited by policy — they
+As described above, the Extension has no server operated by the Developer, and your data
+never comes under the Developer's control (the Google Account used for settings sync is
+your own, and the Developer has no access to it). These practices are therefore not merely prohibited by policy — they
 **cannot occur by the design of the Extension.**
 
 ## 9. Children
@@ -219,3 +277,4 @@ For questions about this policy or about how the Extension handles data, please 
 | --- | --- |
 | September 12, 2026 | Initial version |
 | September 28, 2026 | Added disclosure of the feedback link (Google Forms) as an external destination |
+| September 30, 2026 | Added desktop notifications (stored data, image fetching, and how notifications are handled), and settings sync via Chrome sync (where data is stored, transmission, and how to delete it) |
