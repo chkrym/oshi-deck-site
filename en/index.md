@@ -8,7 +8,7 @@ lang: en
 authoritative text; if there is any discrepancy between the two, the Japanese version prevails.*
 
 - Effective date: September 12, 2026
-- Last updated: September 30, 2026
+- Last updated: October 4, 2026
 
 ## 1. Introduction
 
@@ -45,6 +45,7 @@ categories defined by the Chrome Web Store.
 | --- | --- | --- | --- | --- |
 | Twitch access token | Authentication information | Twitch authorization screen (with your approval) | To query Twitch's API on your behalf for the channels you follow and their live status | On your device only |
 | Twitch user ID and login name | Personally identifiable information | Twitch API | To identify whose data to request, and to show the connected account in the settings screen | On your device only |
+| A hash of the value that distinguishes the account currently selected on YouTube (converted so that the original value cannot be recovered; the account ID itself is not stored) | Personally identifiable information | youtube.com pages (§5) | To notice when you switch accounts on YouTube, and rebuild the list from the subscriptions of the account you switched to | On your device only |
 | Channels you follow on Twitch and their live streams (channel name, icon, stream title, viewer count, category) | Website content | Twitch API | To display the stream list, sort channels into your lists, calculate the live count shown on the Extension's toolbar icon, and show desktop notifications (see below) | On your device only |
 | Channels you are subscribed to on YouTube, and live or upcoming streams (channel name, icon, video title, thumbnail, scheduled start time) | Website content | Pages on youtube.com (see §5) | Same as above | On your device only |
 | Lists you create, hidden-item settings, notification settings (which channels and lists to notify you about), and display settings (theme, sort order, view mode) | — (settings you create within the Extension) | Your own actions | To restore your settings the next time you open the Extension, and, when Chrome sync is on, to carry your settings over to your other devices | On your device; also synced to your Google Account when extensions are included in Chrome sync (see §3) |
@@ -87,7 +88,8 @@ The settings you create are also saved to the storage area used by Chrome's sync
 
 - **Synced**: your lists, hidden items (hidden channels and streams), notification
   settings, and display settings
-- **Not synced**: your Twitch access token, your Twitch user ID and login name, the channel
+- **Not synced**: your Twitch access token, your Twitch user ID and login name, the hash
+  that distinguishes your YouTube account, the channel
   lists and stream information retrieved from each service, internal operating state, and
   the list currently shown on each device. As before, these are stored only on your device
   (in `chrome.storage.local`)
@@ -278,3 +280,4 @@ For questions about this policy or about how the Extension handles data, please 
 | September 12, 2026 | Initial version |
 | September 28, 2026 | Added disclosure of the feedback link (Google Forms) as an external destination |
 | September 30, 2026 | Added desktop notifications (stored data, image fetching, and how notifications are handled), and settings sync via Chrome sync (where data is stored, transmission, and how to delete it) |
+| October 4, 2026 | Added the hash that distinguishes your YouTube account to the stored data, for detecting account switches on YouTube |
