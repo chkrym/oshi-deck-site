@@ -1,9 +1,9 @@
-# oshi-deck-site
+# streamtheon-site
 
-Chrome拡張機能 **Oshi Deck** のプライバシーポリシーを公開するためのリポジトリ。
+Chrome拡張機能 **Streamtheon** のプライバシーポリシーを公開するためのリポジトリ。
 
-- 日本語版(正文): https://chkrym.github.io/oshi-deck-site/ja/
-- 英語版(参考訳): https://chkrym.github.io/oshi-deck-site/en/
+- 日本語版(正文): https://chkrym.github.io/streamtheon-site/ja/
+- 英語版(参考訳): https://chkrym.github.io/streamtheon-site/en/
 
 拡張機能本体のソースコードは別のプライベートリポジトリで管理している。
 このリポジトリはポリシー文書の**正本**であり、文面をここ以外の場所に複製しない。

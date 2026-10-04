@@ -8,11 +8,11 @@ lang: en
 authoritative text; if there is any discrepancy between the two, the Japanese version prevails.*
 
 - Effective date: September 12, 2026
-- Last updated: October 4, 2026
+- Last updated: October 5, 2026
 
 ## 1. Introduction
 
-Oshi Deck ("the Extension") is a Chrome extension developed and provided by an individual
+Streamtheon ("the Extension") is a Chrome extension developed and provided by an individual
 developer, chkrym ("we" or "the Developer"). This policy explains what data the Extension
 handles, why it handles it, and where that data is stored.
 
@@ -281,3 +281,4 @@ For questions about this policy or about how the Extension handles data, please 
 | September 28, 2026 | Added disclosure of the feedback link (Google Forms) as an external destination |
 | September 30, 2026 | Added desktop notifications (stored data, image fetching, and how notifications are handled), and settings sync via Chrome sync (where data is stored, transmission, and how to delete it) |
 | October 4, 2026 | Added the hash that distinguishes your YouTube account to the stored data, for detecting account switches on YouTube |
+| October 5, 2026 | Renamed the Extension from "Oshi Deck" to "Streamtheon" (no change to how data is handled) |
