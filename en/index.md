@@ -8,7 +8,7 @@ lang: en
 authoritative text; if there is any discrepancy between the two, the Japanese version prevails.*
 
 - Effective date: September 12, 2026
-- Last updated: October 5, 2026
+- Last updated: October 6, 2026
 
 ## 1. Introduction
 
@@ -48,7 +48,7 @@ categories defined by the Chrome Web Store.
 | A hash of the value that distinguishes the account currently selected on YouTube (converted so that the original value cannot be recovered; the account ID itself is not stored) | Personally identifiable information | youtube.com pages (§5) | To notice when you switch accounts on YouTube, and rebuild the list from the subscriptions of the account you switched to | On your device only |
 | Channels you follow on Twitch and their live streams (channel name, icon, stream title, viewer count, category) | Website content | Twitch API | To display the stream list, sort channels into your lists, calculate the live count shown on the Extension's toolbar icon, and show desktop notifications (see below) | On your device only |
 | Channels you are subscribed to on YouTube, and live or upcoming streams (channel name, icon, video title, thumbnail, scheduled start time) | Website content | Pages on youtube.com (see §5) | Same as above | On your device only |
-| Lists you create, hidden-item settings, notification settings (which channels and lists to notify you about), and display settings (theme, sort order, view mode) | — (settings you create within the Extension) | Your own actions | To restore your settings the next time you open the Extension, and, when Chrome sync is on, to carry your settings over to your other devices | On your device; also synced to your Google Account when extensions are included in Chrome sync (see §3) |
+| Lists you create, hidden-item settings, notification settings (which channels and lists to notify you about, and which upcoming streams to notify you about when they start), and display settings (theme, sort order, view mode) | — (settings you create within the Extension) | Your own actions | To restore your settings the next time you open the Extension, and, when Chrome sync is on, to carry your settings over to your other devices | On your device; also synced to your Google Account when extensions are included in Chrome sync (see §3) |
 | Internal operating state (IDs of videos already seen, timestamps of the last fetch, back-off state when access is rate-limited, the notification baseline (URLs of the live streams seen at the last check), and the settings sync status (such as why the last upload failed)) | — (internal data required to operate) | The Extension itself | To avoid fetching the same information repeatedly and to keep requests to each service to a minimum; to avoid notifying you twice about the same stream; to tell you in the settings screen when syncing is not working | On your device only |
 
 The Extension handles no data beyond what is listed above. In particular, it does not read
@@ -61,7 +61,8 @@ The Extension can show a desktop notification when a channel you follow or subsc
 starts streaming.
 
 - Notifications are shown only for the channels and lists you turn on in the settings
-  screen. **All notifications are off by default**
+  screen, and for upcoming streams you turn on with "Notify for this stream" in the stream
+  list. **All notifications are off by default**
 - Notifications are displayed through Chrome's and your operating system's notification
   features. Their contents (channel name, stream title, platform name, list name, and the
   channel icon and stream thumbnail images) may remain in your operating system's
@@ -282,3 +283,4 @@ For questions about this policy or about how the Extension handles data, please 
 | September 30, 2026 | Added desktop notifications (stored data, image fetching, and how notifications are handled), and settings sync via Chrome sync (where data is stored, transmission, and how to delete it) |
 | October 4, 2026 | Added the hash that distinguishes your YouTube account to the stored data, for detecting account switches on YouTube |
 | October 5, 2026 | Renamed the Extension from "Oshi Deck" to "Streamtheon" (no change to how data is handled) |
+| October 6, 2026 | Added upcoming streams to notify you about to the notification settings, following the addition of per-stream notifications ("Notify for this stream") |
